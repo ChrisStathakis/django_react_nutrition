@@ -4,6 +4,8 @@ import store from './store';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomepageView from './general_views/Homepage';
 import LoginView from './general_views/LoginView';
+import ProfileView from './general_views/ProfileView';
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
                     <Switch>
                         <Route exact path={'/'} component={HomepageView} />
                         <Route exact path={'/login/'} component={LoginView}/>
+                        <Route exact path={'/profile/'} component={ProfileView} />
                         </Switch>
                   </BrowserRouter>
             </div>

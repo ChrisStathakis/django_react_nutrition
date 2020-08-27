@@ -1,4 +1,4 @@
-
+import {CURRENT_USER_REQUEST} from "../general_views/actionTypes";
 
 
 const initialState = {
@@ -16,5 +16,7 @@ export default function authReducer(state=initialState, action) {
                 id: action.payload.id,
                 email: action.payload.email
             }
+        default:
+            return state
     }
 }
