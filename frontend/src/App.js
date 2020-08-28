@@ -16,7 +16,7 @@ function App() {
                         <Route exact path={'/'} component={HomepageView} />
                         <Route exact path={'/login/'} component={LoginView}/>
                         <Route exact path={'/profile/'} component={ProfileView} />
-                        </Switch>
+                    </Switch>
                   </BrowserRouter>
             </div>
        </Provider>

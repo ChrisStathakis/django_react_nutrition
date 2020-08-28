@@ -21,13 +21,15 @@ export default function authReducer(state=initialState, action) {
     switch (action.type){
         case CURRENT_USER_REQUEST:
             return {
+                ...state,
                 username: action.payload.username,
                 id: action.payload.id,
                 email: action.payload.email
             };
         case PROFILE_REQUEST:
-
+            console.log('reducer', action.payload, action.userload);
             return {
+                ...state,
                 profile_id: action.payload.id,
                 weight: action.payload.weight,
                 height: action.payload.height,
@@ -36,7 +38,10 @@ export default function authReducer(state=initialState, action) {
                 tag_gender: action.payload.tag_gender,
                 workout_lvl: action.payload.workout_lvl,
                 bmi:action.payload.bmi,
-                calories: action.payload.calories
+                calories: action.payload.calories,
+                username: action.userload.username,
+                id: action.userload.id,
+                email: action.userload.email
             };
         default:
             return state

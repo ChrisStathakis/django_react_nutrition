@@ -13,20 +13,21 @@ import {
   Segment,
 } from 'semantic-ui-react'
 import { withRouter } from "react-router-dom";
-
+import {getProfileData, getUserData} from "../actions/authActions";
 
 import Navbar from '../components/navbar';
+import {PROFILES_ENDPOINT} from "../tools/endpoints";
 
 class HomepageView extends React.Component{
 
 
     componentDidMount() {
-
-
+        this.props.getUserData();
     }
 
     render(){
-        const {calories} = this.props;
+        const {calories, workout_lvl, height, weight} = this.props;
+        console.log('props', this.props);
         return (
             <div>
                 <Navbar />
@@ -42,22 +43,22 @@ class HomepageView extends React.Component{
                          <Card>
                              <Card.Content>
                                  <Card.Header>Total Calories {calories}</Card.Header>
-                                 <Card.Meta>Friends of Elliot</Card.Meta>
+                                 <Card.Meta>Age</Card.Meta>
                                  <Card.Description>
-                                      <List items={['Age', 'Height', 'Weight']} />
+                                      <List items={[`Fitness Status ${workout_lvl}`, `Height ${height}`, `Weight${weight}`]} />
                                  </Card.Description>
                              </Card.Content>
-      <Card.Content extra>
-        <div className='ui two buttons'>
-          <Button basic color='green'>
-            Approve
-          </Button>
-          <Button basic color='red'>
-            Decline
-          </Button>
-        </div>
-      </Card.Content>
-    </Card>
+                             <Card.Content extra>
+                                 <div className='ui two buttons'>
+                                     <Button basic color='green'>
+                                         Approve
+                                     </Button>
+                                     <Button basic color='red'>
+                                         Decline
+                                     </Button>
+                                 </div>
+                             </Card.Content>
+                         </Card>
                         </Grid.Column>
                         <Grid.Column>
                           <h4>World</h4>
@@ -129,7 +130,11 @@ class HomepageView extends React.Component{
 }
 
 const mapStateToProps = state =>({
-    weight: state.authReducer.weight
+    weight: state.authReducer.weight,
+    age: state.authReducer.age,
+    calories: state.authReducer.calories,
+    workout_lvl: state.authReducer.workout_lvl,
+
 });
 
-export default withRouter(connect(mapStateToProps, {})(HomepageView));
+export default withRouter(connect(mapStateToProps, {getProfileData, getUserData})(HomepageView));
