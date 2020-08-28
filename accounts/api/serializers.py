@@ -7,8 +7,12 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ['id', 'public', 'user', 'tag_user',
+                  'birth', 'weight', 'height', 'bmi',
+                  'gender', 'workout_lvl', 'tag_gender',
+                  'calories'
 
+                  ]
 
 
 class UserSerializer(serializers.ModelSerializer):

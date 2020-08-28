@@ -34,7 +34,7 @@ class ProfileView extends Component{
 
     componentDidMount(){
         const id = this.props.id;
-        const endpoint = PROFILES_ENDPOINT + '?user=' + id
+        const endpoint = PROFILES_ENDPOINT + '?user=' + id;
         axiosInstance.get(endpoint).then(
             respData=>{
                 const new_data = respData.data;
@@ -88,7 +88,8 @@ class ProfileView extends Component{
 
 const mapStateToProps = state => ({
     username: state.authReducer.username,
-    user_id : state.authReducer.id
+    user_id : state.authReducer.id,
+    calories: state.authReducer.calories
 });
 
 

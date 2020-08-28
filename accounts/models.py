@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from decimal import Decimal
 
 GENDER_CHOICES = (
     ('a', 'Male'),
@@ -32,17 +33,26 @@ class Profile(models.Model):
         return f'Profile - {self.user.username}'
 
     def get_age(self):
-        return 50
+        return 35
 
     def find_bmi(self):
-        return (self.weight/(self.height)*(self.height)) * 703 if self.height != 0 else 0
+        return 0
 
     def find_bmr(self):
+        print(self.weight)
         if self.gender == 'a':
-            return 66 + (6.2 * self.weight) + (12.7 * self.height) - (6.76 * self.get_age())
+            return 66 + (Decimal(6.2) * Decimal(self.weight)) + (Decimal(12.7) * Decimal(self.height)) - (Decimal(6.76) * Decimal(self.get_age()))
         else:
-            return 655.1 + (4.35 * self.weight) + (4.7 * self.height) - (4.7 * self.get_age())
+            return 655.1 + (Decimal(4.35) * Decimal(self.weight)) + (Decimal(4.7) * Decimal(self.height)) - (Decimal(4.7)* Decimal(self.get_age()))
 
     def get_calories(self):
-        return self.find_bmr() * self.workout_lvl
+        return Decimal(self.find_bmr()) * Decimal(self.workout_lvl)
 
+    def calories(self):
+        return f'{self.get_calories()} cal'
+
+    def tag_gender(self):
+        return self.get_gender_display()
+
+    def tag_user(self):
+        return self.user.username

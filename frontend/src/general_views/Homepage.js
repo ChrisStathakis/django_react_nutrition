@@ -1,6 +1,10 @@
-import React from 'react'
+import React from 'react';
+import {connect} from 'react-redux';
+
 import {
   Container,
+    Card,
+    Button,
   Divider,
   Grid,
   Header,
@@ -15,26 +19,53 @@ import Navbar from '../components/navbar';
 
 class HomepageView extends React.Component{
 
-    render(){
 
+    componentDidMount() {
+
+
+    }
+
+    render(){
+        const {calories} = this.props;
         return (
             <div>
                 <Navbar />
                 <Container text style={{ marginTop: '7em' }}>
-      <Header as='h1'>Semantic UI React Fixed Template</Header>
-      <p>This is a basic fixed menu template using fixed size containers.</p>
-      <p>
-        A text container is used for the main container, which is useful for single column layouts.
-      </p>
+                    <Header as='h1'>Semantic UI React Fixed Template</Header>
+                    <p>This is a basic fixed menu template using fixed size containers.</p>
+                    <p>
+                      A text container is used for the main container, which is useful for single column layouts.
+                    </p>
+                    <Grid columns={2} divided>
+                      <Grid.Row>
+                        <Grid.Column>
+                         <Card>
+                             <Card.Content>
+                                 <Card.Header>Total Calories {calories}</Card.Header>
+                                 <Card.Meta>Friends of Elliot</Card.Meta>
+                                 <Card.Description>
+                                      <List items={['Age', 'Height', 'Weight']} />
+                                 </Card.Description>
+                             </Card.Content>
+      <Card.Content extra>
+        <div className='ui two buttons'>
+          <Button basic color='green'>
+            Approve
+          </Button>
+          <Button basic color='red'>
+            Decline
+          </Button>
+        </div>
+      </Card.Content>
+    </Card>
+                        </Grid.Column>
+                        <Grid.Column>
+                          <h4>World</h4>
+                        </Grid.Column>
 
-      <Image src='/images/wireframe/media-paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-    </Container>
+                      </Grid.Row>
+                    </Grid>
+                </Container>
 
                 <Segment inverted vertical style={{ margin: '5em 0em 0em', padding: '5em 0em' }}>
                   <Container textAlign='center'>
@@ -97,4 +128,8 @@ class HomepageView extends React.Component{
     }
 }
 
-export default withRouter(HomepageView);
+const mapStateToProps = state =>({
+    weight: state.authReducer.weight
+});
+
+export default withRouter(connect(mapStateToProps, {})(HomepageView));
